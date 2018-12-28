@@ -43,12 +43,8 @@ namespace TListSystem
             TNode *nextNode, *previousNode;
         } *firstNode, *lastNode, *selectedNode;
         
-        TNode* Node()
-        {
-            TNode *pNode;
-            pNode = new TNode();
-            return pNode;
-        }
+        void InitNodes();
+        void DeleteNodes();
     };
 }
 

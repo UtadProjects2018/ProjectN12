@@ -23,14 +23,22 @@ int main(int argc, const char * argv[])
     TListSystem::TList<int> reverseNumbersList = TListSystem::TList<int>::GetReverseList(*numberList);
     for (int i = 0; i < reverseNumbersList.Size() ; i++)
     {
-        if (i == 0)
-        {
-            printf("TList Value %d\n", reverseNumbersList.First());
-        }
-        else
-        {
-            printf("TList Value %d\n", reverseNumbersList.Next());
-        }
+        printf("TList int Value %d\n", i == 0 ? reverseNumbersList.First() : reverseNumbersList.Next());
+    }
+    
+    printf("============================\n");
+    
+    TListSystem::TList<std::string> *stringList = new TListSystem::TList<std::string>();
+    stringList->Push("10");
+    stringList->Push("20");
+    stringList->Push("30");
+    stringList->Push("40");
+    stringList->Push("50");
+    
+    TListSystem::TList<std::string> reverseStringList = TListSystem::TList<std::string>::GetReverseList(*stringList);
+    for (int i = 0; i < reverseStringList.Size(); i ++)
+    {
+        printf("TList string Value %s\n", i == 0 ? reverseStringList.First().c_str() : reverseStringList.Next().c_str());
     }
     
     return 0;

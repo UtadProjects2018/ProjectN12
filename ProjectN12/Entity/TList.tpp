@@ -7,43 +7,33 @@
 //
 
 #include "TList.hpp"
-#include <iostream>
 
 template <class T>
 TListSystem::TList<T>::TList()
 {
-    firstNode = nullptr;
-    lastNode  = nullptr;
-    selectedNode = nullptr;
-    m_size = 0;
+    InitNodes();
 }
 
 template <class T>
 TListSystem::TList<T>::TList(const TList &list)
 {
-    firstNode = nullptr;
-    lastNode  = nullptr;
-    selectedNode = nullptr;
-    m_size = 0;
-
-    this->firstNode = list.firstNode;
-    this->lastNode = list.lastNode;
-    this->selectedNode = list.selectedNode;
-    m_size = list.m_size;
+    InitNodes();
+    
+    if (list.m_size > 0)
+    {
+        TNode *element = list.firstNode;
+        while (element)
+        {
+            Push(element->tlistData);
+            element = element->nextNode;
+        }
+    }
 }
 
 template <class T>
 TListSystem::TList<T>::~TList()
 {
-    delete firstNode;
-    delete lastNode;
-
-    firstNode = nullptr;
-    lastNode  = nullptr;
-
-    selectedNode = nullptr;
-    delete selectedNode;
-
+    DeleteNodes();
 }
 
 template <class T>
@@ -56,7 +46,7 @@ template <class T>
 unsigned int TListSystem::TList<T>::Push(T psz)
 {
     TNode *node;
-    node = TListSystem::TList<T>::Node();
+    node = new TNode();
     node->tlistData = psz;
     
     if(!lastNode)
@@ -120,15 +110,11 @@ const T TListSystem::TList<T>::Pop()
 {
     if (m_size == 0)
     {
-        firstNode = nullptr;
-        lastNode  = nullptr;
-        selectedNode = nullptr;
+        DeleteNodes();
     }
     else if (m_size == 1)
     {
-        firstNode = nullptr;
-        lastNode  = nullptr;
-        selectedNode = nullptr;
+        DeleteNodes();
         m_size --;
     }
     else
@@ -139,7 +125,7 @@ const T TListSystem::TList<T>::Pop()
     
     if (!lastNode)
     {
-        return 0;
+        return NULL;
     }
     else
     {
@@ -159,7 +145,7 @@ void TListSystem::TList<T>::Reset()
 template <class T>
 TListSystem::TList<T> TListSystem::TList<T>::GetReverseList(TList lstSrc)
 {
-    TListSystem::TList<int> list;
+    TListSystem::TList<T> list;
     lstSrc.Last();
     for (int i = lstSrc.Size(); i > 0; i--)
     {
@@ -168,4 +154,25 @@ TListSystem::TList<T> TListSystem::TList<T>::GetReverseList(TList lstSrc)
     }
 
     return list;
+}
+
+template <class T>
+void TListSystem::TList<T>::InitNodes()
+{
+    firstNode = nullptr;
+    lastNode  = nullptr;
+    selectedNode = nullptr;
+    m_size = 0;
+}
+
+template <class T>
+void TListSystem::TList<T>::DeleteNodes()
+{
+    firstNode = nullptr;
+    lastNode  = nullptr;
+    selectedNode = nullptr;
+
+    delete firstNode;
+    delete lastNode;
+    delete selectedNode;
 }
