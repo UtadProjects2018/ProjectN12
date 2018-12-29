@@ -157,6 +157,22 @@ TListSystem::TList<T> TListSystem::TList<T>::GetReverseList(TList lstSrc)
 }
 
 template <class T>
+TListSystem::TList<T> TListSystem::TList<T>::GetBetterReverseList(const TList& lstSrc)
+{
+    TListSystem::TList<T> list;
+    TListSystem::TList<T> listCopy = lstSrc;
+    
+    listCopy.Last();
+    for (int i = listCopy.Size(); i > 0; i--)
+    {
+        list.Push(listCopy.selectedNode->tlistData);
+        listCopy.Previous();
+    }
+
+    return list;
+}
+
+template <class T>
 void TListSystem::TList<T>::InitNodes()
 {
     firstNode = nullptr;

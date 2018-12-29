@@ -25,6 +25,7 @@ namespace TListSystem
         unsigned int Size();
         unsigned int Push(T psz);
         static TList GetReverseList(TList lstSrc);
+        static TList GetBetterReverseList(const TList& lstSrc);
         
         const T First();
         const T Last();

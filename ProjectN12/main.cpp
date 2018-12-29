@@ -41,5 +41,20 @@ int main(int argc, const char * argv[])
         printf("TList string Value %s\n", i == 0 ? reverseStringList.First().c_str() : reverseStringList.Next().c_str());
     }
     
+    printf("============================\n");
+    
+    TListSystem::TList<int> *numberSecondList = new TListSystem::TList<int>();
+    numberSecondList->Push(10);
+    numberSecondList->Push(20);
+    numberSecondList->Push(30);
+    numberSecondList->Push(40);
+    numberSecondList->Push(50);
+    
+    TListSystem::TList<int> betterReverseNumbersList = TListSystem::TList<int>::GetBetterReverseList(*numberList);
+    for (int i = 0; i < betterReverseNumbersList.Size() ; i++)
+    {
+        printf("TList int Value %d\n", i == 0 ? betterReverseNumbersList.First() : betterReverseNumbersList.Next());
+    }
+    
     return 0;
 }
